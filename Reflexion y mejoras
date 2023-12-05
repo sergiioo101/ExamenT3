@@ -1,0 +1,20 @@
+1. Optimización de Búsqueda:
+Si la tabla de símbolos puede volverse muy grande, podrías considerar técnicas de optimización para la búsqueda, como el uso de estructuras de datos más eficientes (por ejemplo, árboles de búsqueda) o la implementación de algún tipo de indexación para acceder rápidamente a los símbolos más utilizados.
+
+2. Expansión de la Tabla de Símbolos:
+Podrías expandir la tabla de símbolos para admitir más tipos de datos. Por ejemplo, podrías agregar soporte para matrices, objetos o funciones. Esto haría que el sistema de scripting sea más versátil y útil para una variedad más amplia de aplicaciones.
+
+3. Introducción de Funciones Integradas:
+Podrías introducir un mecanismo para agregar funciones integradas al entorno de scripting. Esto permitiría a los desarrolladores de juegos proporcionar funciones específicas del juego que los guionistas o diseñadores podrían utilizar directamente en sus scripts.
+
+4. Soporte para Eventos del Juego:
+Podrías explorar la posibilidad de integrar un sistema de manejo de eventos. Esto permitiría que ciertas funciones o scripts se activen automáticamente en respuesta a eventos específicos del juego, como la muerte de un jefe o la finalización de una misión.
+
+5. Validación de Scripts:
+Agregar un sistema de validación para los scripts antes de ejecutarlos. Esto podría incluir la verificación de sintaxis, la detección de posibles errores y la garantía de que los tipos de datos utilizados sean coherentes.
+
+6. Extensibilidad para Otros Lenguajes:
+Si bien el sistema actual parece estar diseñado en torno a un entorno de scripting personalizado, podrías considerar la posibilidad de extenderlo para admitir otros lenguajes de scripting populares, como Lua o Python.
+
+7. Seguridad del Scripting:
+Implementar medidas de seguridad para prevenir la ejecución de scripts maliciosos. Esto podría incluir la limitación de ciertas operaciones o la introducción de un sistema de permisos.
