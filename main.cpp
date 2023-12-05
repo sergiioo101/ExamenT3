@@ -1,6 +1,7 @@
 #include <iostream>
 #include <map>
 #include <string>
+#include <optional>
 
 class Environment {
 public:
@@ -28,6 +29,20 @@ public:
         }
     }
 
+    // Método para buscar un símbolo en la tabla
+    std::optional<int> lookupSymbol(const std::string& name) const {
+        // Buscar el símbolo en la tabla
+        auto it = symbolTable.find(name);
+        if (it != symbolTable.end()) {
+            // El símbolo existe, devolver su valor
+            return it->second;
+        } else {
+            // El símbolo no existe, devolver un valor "vacío" usando std::nullopt
+            std::cerr << "Advertencia: El símbolo " << name << " no existe en la tabla." << std::endl;
+            return std::nullopt;
+        }
+    }
+
 private:
     // Tabla de símbolos
     std::map<std::string, int> symbolTable;
@@ -40,7 +55,14 @@ int main() {
     // Insertar símbolos de prueba
     myEnvironment.insertSymbol("variable1", 10);
     myEnvironment.insertSymbol("variable2", 20);
-    myEnvironment.insertSymbol("variable1", 30);  // Intentar insertar un símbolo existente
+
+    // Buscar símbolos
+    auto result1 = myEnvironment.lookupSymbol("variable1");
+    if (result1) {
+        std::cout << "Valor de variable1: " << *result1 << std::endl;
+    }
+
+    auto result2 = myEnvironment.lookupSymbol("variable3");  // Intentar buscar un símbolo que no existe
 
     return 0;
 }
