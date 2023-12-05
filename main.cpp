@@ -1,34 +1,35 @@
+#include <iostream>
 #include <map>
 #include <string>
-#include <stdexcept>
-
-class Variant {
-    // Define la clase Variant con sus atributos y métodos
-    // Puedes implementarla según tus necesidades y con soporte para diferentes tipos de datos.
-};
 
 class Environment {
-private:
-    std::map<std::string, Variant> symbolTable;
-
 public:
-    // Constructor y destructor si es necesario
-
-    // Método para insertar símbolos en el entorno
-    void insert(const std::string& name, const Variant& value) {
-        symbolTable[name] = value;
+    // Constructor
+    Environment() {
+        // Puedes inicializar cosas si es necesario
     }
 
-    // Método para buscar símbolos en el entorno
-    Variant lookup(const std::string& name) const {
-        auto it = symbolTable.find(name);
-        if (it != symbolTable.end()) {
-            return it->second;
-        } else {
-            throw std::runtime_error("Symbol not found: " + name);
-        }
+    // Destructor
+    ~Environment() {
+        // Puedes realizar tareas de limpieza si es necesario
     }
 
-    // Otras funciones relevantes
+    // Métodos públicos aquí...
+
+private:
+    // Tabla de símbolos
+    std::map<std::string, int> symbolTable;
 };
+
+// Otras definiciones de métodos y código pueden ir aquí...
+
+int main() {
+    // Ejemplo de uso de la clase Environment
+    Environment myEnvironment;
+
+    // Más código de prueba...
+
+    return 0;
+}
+
 
