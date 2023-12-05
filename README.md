@@ -7,3 +7,12 @@ Parte 1: Preguntas de elección múltiple
 3. b) Convierte un objeto Variant a una cadena JSON
 4. a) Convierte una cadena JSON en un objeto Variant
 
+DESCRIPCION BREVE DE CADA EJERCICIO:
+1.
+2.
+3.
+4.
+5.
+6.
+7.
+8.
