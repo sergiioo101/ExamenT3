@@ -2,6 +2,7 @@
 #include <map>
 #include <string>
 #include <stdexcept>
+#include <utility>
 #include <variant>
 #include <optional>
 
@@ -14,15 +15,15 @@ public:
     Variant() : value(0) {}
 
     // Constructor con un valor inicial
-    Variant(const ValueType& initialValue) : value(initialValue) {}
+    explicit Variant(ValueType  initialValue) : value(std::move(initialValue)) {}
 
     // Obtener el valor almacenado
-    ValueType getValue() const {
+    [[maybe_unused]] [[nodiscard]] ValueType getValue() const {
         return value;
     }
 
     // Función para obtener una representación de cadena del valor almacenado en Variant
-    std::string getValueAsString() const {
+    [[nodiscard]] std::string getValueAsString() const {
         if (std::holds_alternative<int>(value)) {
             return std::to_string(std::get<int>(value));
         } else if (std::holds_alternative<double>(value)) {
@@ -65,7 +66,7 @@ public:
     }
 
     // Método para buscar un símbolo en la tabla
-    std::optional<Variant::ValueType> lookupSymbol(const std::string& name) const {
+    [[nodiscard]] std::optional<Variant::ValueType> lookupSymbol(const std::string& name) const {
         // Buscar el símbolo en la tabla
         auto it = symbolTable.find(name);
         if (it != symbolTable.end()) {
@@ -92,7 +93,7 @@ public:
     }
 
     // Método para verificar si un símbolo existe en la tabla
-    bool symbolExists(const std::string& name) const {
+    [[nodiscard]] bool symbolExists(const std::string& name) const {
         return symbolTable.find(name) != symbolTable.end();
     }
 
