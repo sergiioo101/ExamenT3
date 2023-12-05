@@ -77,6 +77,25 @@ public:
         }
     }
 
+    // Método para eliminar un símbolo de la tabla
+    void removeSymbol(const std::string& name) {
+        // Buscar el símbolo en la tabla
+        auto it = symbolTable.find(name);
+        if (it != symbolTable.end()) {
+            // El símbolo existe, eliminarlo
+            symbolTable.erase(it);
+            std::cout << "Símbolo eliminado: " << name << std::endl;
+        } else {
+            // El símbolo no existe, lanzar una excepción
+            throw std::out_of_range("Error: No se puede eliminar el símbolo porque no existe en la tabla.");
+        }
+    }
+
+    // Método para verificar si un símbolo existe en la tabla
+    bool symbolExists(const std::string& name) const {
+        return symbolTable.find(name) != symbolTable.end();
+    }
+
 private:
     // Tabla de símbolos
     std::map<std::string, Variant::ValueType> symbolTable;
@@ -108,8 +127,15 @@ int main() {
             std::cout << "Valor de variable3: " << Variant(*result3).getValueAsString() << std::endl;
         }
 
-        // Intentar insertar un símbolo ya existente
-        myEnvironment.insertSymbol("variable1", 30);  // Esto debería lanzar una excepción
+        // Eliminar un símbolo
+        myEnvironment.removeSymbol("variable1");
+
+        // Verificar si un símbolo existe
+        if (myEnvironment.symbolExists("variable1")) {
+            std::cout << "El símbolo variable1 sigue existiendo." << std::endl;
+        } else {
+            std::cout << "El símbolo variable1 ha sido eliminado." << std::endl;
+        }
 
     } catch (const std::exception& e) {
         // Capturar y manejar la excepción
@@ -118,5 +144,4 @@ int main() {
 
     return 0;
 }
-
 
