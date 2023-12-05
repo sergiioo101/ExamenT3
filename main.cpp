@@ -1,6 +1,7 @@
 #include <iostream>
 #include <map>
 #include <string>
+#include <stdexcept>
 #include <optional>
 
 class Environment {
@@ -24,8 +25,8 @@ public:
             symbolTable[name] = value;
             std::cout << "Símbolo insertado: " << name << " = " << value << std::endl;
         } else {
-            // El símbolo ya existe, mostrar un mensaje de error o manejar la situación según sea necesario
-            std::cerr << "Error: El símbolo " << name << " ya existe en la tabla." << std::endl;
+            // El símbolo ya existe, lanzar una excepción
+            throw std::invalid_argument("Error: El símbolo ya existe en la tabla.");
         }
     }
 
@@ -37,9 +38,8 @@ public:
             // El símbolo existe, devolver su valor
             return it->second;
         } else {
-            // El símbolo no existe, devolver un valor "vacío" usando std::nullopt
-            std::cerr << "Advertencia: El símbolo " << name << " no existe en la tabla." << std::endl;
-            return std::nullopt;
+            // El símbolo no existe, lanzar una excepción
+            throw std::out_of_range("Error: El símbolo no existe en la tabla.");
         }
     }
 
@@ -49,20 +49,27 @@ private:
 };
 
 int main() {
-    // Ejemplo de uso de la clase Environment
-    Environment myEnvironment;
+    try {
+        // Ejemplo de uso de la clase Environment
+        Environment myEnvironment;
 
-    // Insertar símbolos de prueba
-    myEnvironment.insertSymbol("variable1", 10);
-    myEnvironment.insertSymbol("variable2", 20);
+        // Insertar símbolos de prueba
+        myEnvironment.insertSymbol("variable1", 10);
+        myEnvironment.insertSymbol("variable2", 20);
 
-    // Buscar símbolos
-    auto result1 = myEnvironment.lookupSymbol("variable1");
-    if (result1) {
-        std::cout << "Valor de variable1: " << *result1 << std::endl;
+        // Buscar símbolos
+        auto result1 = myEnvironment.lookupSymbol("variable1");
+        if (result1) {
+            std::cout << "Valor de variable1: " << *result1 << std::endl;
+        }
+
+        // Intentar insertar un símbolo ya existente
+        myEnvironment.insertSymbol("variable1", 30);  // Esto debería lanzar una excepción
+
+    } catch (const std::exception& e) {
+        // Capturar y manejar la excepción
+        std::cerr << "Excepción: " << e.what() << std::endl;
     }
-
-    auto result2 = myEnvironment.lookupSymbol("variable3");  // Intentar buscar un símbolo que no existe
 
     return 0;
 }
